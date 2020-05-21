@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_star_map_button"
+            android:icon="@drawable/ic_android_black_24dp"
+            android:title="Star Map" />
+        <item
+            android:id="@+id/menu_system_button"
+            android:title="System" />
+        <item
+            android:id="@+id/menu_local_button"
+            android:title="Local" />
+        <item
+            android:id="@+id/menu_ship_and_crew_button"
+            android:title="Ship &amp; Crew" />
+        <item
+            android:id="@+id/menu_contracts_button"
+            android:title="Contracts" />
+        <item
+            android:id="@+id/menu_communications_button"
+            android:title="Communications" />
+        <item
+            android:id="@+id/menu_organization_button"
+            android:title="Organization" />
+    </group>
+
+    <group>
+        <item></item>
+    </group>
+
+</menu>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "403684546401",
+    "firebase_url": "https://simplespacemmo-8e5e8.firebaseio.com",
+    "project_id": "simplespacemmo-8e5e8",
+    "storage_bucket": "simplespacemmo-8e5e8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:403684546401:android:5e6b80c6a2c5a8694bd720",
+        "android_client_info": {
+          "package_name": "com.codestallions.spacemmo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "403684546401-smcm00hhpo1piblo9bjmf7kkeucd5dib.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.codestallions.spacemmo",
+            "certificate_hash": "f5afb974efe0c70a63783f48fa279c5a81cf17a4"
+          }
+        },
+        {
+          "client_id": "403684546401-cdliqhet3ord9f93ri2r0oht1v6c9c6a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2lG-jBpzn5VZuR-vGX5PrOso-DTh4sdo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "403684546401-cdliqhet3ord9f93ri2r0oht1v6c9c6a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

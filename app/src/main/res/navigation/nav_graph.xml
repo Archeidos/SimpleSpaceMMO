@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/main_fragment">
+
+    <fragment
+        android:id="@+id/main_fragment"
+        android:name="com.codestallions.spacemmo.ui.fragments.MainFragment"
+        android:label="Main Fragment"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_main_fragment_to_test_fragment"
+            app:destination="@id/test_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/test_fragment"
+        android:name="com.codestallions.spacemmo.ui.fragments.TestFragment"
+        android:label="Test Fragment"
+        tools:layout="@layout/fragment_test" />
+
+</navigation>
