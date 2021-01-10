@@ -1,15 +1,32 @@
-/build
+# Build generated
+build/
+DerivedData/
+
+# Intellij
+*.iml
+.idea
+
+# Android Studio
+captures/
+.externalNativeBuild
+
+# Built Android application files
+*.apk
+
+# Google Services (ex. APIs and Firebase)
+google-services.json
+GoogleService-Info.plist
+
+# Firebase Hosting
+.firebaserc
+firebase-debug.log
+
+# Other
 .gradle
 local.properties
-.idea
-build/
 .DS_Store
-*.iml
-*.apk
 *.aar
 *.zip
-google-services.json
-
 .project
 .settings
 .classpath
