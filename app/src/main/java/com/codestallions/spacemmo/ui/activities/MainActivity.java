@@ -75,7 +75,25 @@ public class MainActivity extends BaseActivity implements
 
         switch (id) {
             case R.id.menu_star_map_button:
-                navController.navigate(R.id.test_fragment);
+                navController.navigate(R.id.starmapFragment);
+                break;
+            case R.id.menu_system_button:
+                navController.navigate(R.id.systemFragment);
+                break;
+            case R.id.menu_scanners_button:
+                navController.navigate(R.id.scannersFragment);
+                break;
+            case R.id.menu_ship_and_crew_button:
+                navController.navigate(R.id.shipCrewFragment);
+                break;
+            case R.id.menu_contracts_button:
+                navController.navigate(R.id.contractsFragment);
+                break;
+            case R.id.menu_communications_button:
+                navController.navigate(R.id.communicationsFragment);
+                break;
+            case R.id.menu_organization_button:
+                navController.navigate(R.id.organizationFragment);
                 break;
         }
         return true;

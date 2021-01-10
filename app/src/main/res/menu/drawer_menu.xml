@@ -10,8 +10,8 @@
             android:id="@+id/menu_system_button"
             android:title="System" />
         <item
-            android:id="@+id/menu_local_button"
-            android:title="Local" />
+            android:id="@+id/menu_scanners_button"
+            android:title="Scanners" />
         <item
             android:id="@+id/menu_ship_and_crew_button"
             android:title="Ship &amp; Crew" />

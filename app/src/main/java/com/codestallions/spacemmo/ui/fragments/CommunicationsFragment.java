@@ -10,11 +10,13 @@ import androidx.annotation.Nullable;
 
 import com.codestallions.spacemmo.R;
 
-public class TestFragment extends BaseFragment {
+public class CommunicationsFragment extends BaseFragment {
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_test, container, false);
+        return inflater.inflate(R.layout.fragment_comms, container, false);
     }
+
 }
+

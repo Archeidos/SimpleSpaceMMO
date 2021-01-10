@@ -11,13 +11,61 @@
         android:label="Main Fragment"
         tools:layout="@layout/fragment_main" >
         <action
-            android:id="@+id/action_main_fragment_to_test_fragment"
-            app:destination="@id/test_fragment" />
+            android:id="@+id/action_main_fragment_to_starmap_fragment"
+            app:destination="@id/starmapFragment" />
+        <action
+            android:id="@+id/action_main_fragment_to_system_fragment"
+            app:destination="@id/systemFragment" />
+        <action
+            android:id="@+id/action_main_fragment_to_scanners_fragment"
+            app:destination="@id/scannersFragment" />
+        <action
+            android:id="@+id/action_main_fragment_to_ship_crew_fragment"
+            app:destination="@id/shipCrewFragment" />
+        <action
+            android:id="@+id/action_main_fragment_to_contracts_fragment"
+            app:destination="@id/contractsFragment" />
+        <action
+            android:id="@+id/action_main_fragment_to_communications_fragment"
+            app:destination="@id/communicationsFragment" />
+        <action
+            android:id="@+id/action_main_fragment_to_organization_fragment"
+            app:destination="@id/organizationFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/test_fragment"
-        android:name="com.codestallions.spacemmo.ui.fragments.TestFragment"
-        android:label="Test Fragment"
-        tools:layout="@layout/fragment_test" />
 
+    <fragment
+        android:id="@+id/starmapFragment"
+        android:name="com.codestallions.spacemmo.ui.fragments.StarMapFragment"
+        android:label="Test Fragment"
+        tools:layout="@layout/fragment_starmap" />
+    <fragment
+        android:id="@+id/systemFragment"
+        android:name="com.codestallions.spacemmo.ui.fragments.SystemFragment"
+        android:label="fragment_system"
+        tools:layout="@layout/fragment_system" />
+    <fragment
+        android:id="@+id/scannersFragment"
+        android:name="com.codestallions.spacemmo.ui.fragments.ScannersFragment"
+        android:label="fragment_scanners"
+        tools:layout="@layout/fragment_scanners" />
+    <fragment
+        android:id="@+id/shipCrewFragment"
+        android:name="com.codestallions.spacemmo.ui.fragments.ShipCrewFragment"
+        android:label="fragment_ship_crew"
+        tools:layout="@layout/fragment_ship_crew" />
+    <fragment
+        android:id="@+id/contractsFragment"
+        android:name="com.codestallions.spacemmo.ui.fragments.ContractsFragment"
+        android:label="fragment_contracts"
+        tools:layout="@layout/fragment_contracts" />
+    <fragment
+        android:id="@+id/communicationsFragment"
+        android:name="com.codestallions.spacemmo.ui.fragments.CommunicationsFragment"
+        android:label="fragment_communications"
+        tools:layout="@layout/fragment_comms" />
+    <fragment
+        android:id="@+id/organizationFragment"
+        android:name="com.codestallions.spacemmo.ui.fragments.OrganizationFragment"
+        android:label="fragment_organization"
+        tools:layout="@layout/fragment_organization" />
 </navigation>

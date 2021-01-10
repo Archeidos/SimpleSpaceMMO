@@ -40,8 +40,6 @@ public class LoginFragment extends Fragment implements ILoginFragment {
 
         emailEditText = loginBinding.getRoot().findViewById(R.id.login_email_entry);
         passwordEditText = loginBinding.getRoot().findViewById(R.id.login_password_entry);
-        Button loginButon = loginBinding.getRoot().findViewById(R.id.login_confirm_button);
-        loginButon.setOnClickListener(view -> handleLoginEntry());
         return loginBinding.getRoot();
     }
 
