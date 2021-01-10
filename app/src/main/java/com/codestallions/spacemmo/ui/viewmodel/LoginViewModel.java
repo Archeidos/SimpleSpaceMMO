@@ -1,7 +1,5 @@
 package com.codestallions.spacemmo.ui.viewmodel;
 
-import android.content.Context;
-
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -18,9 +16,6 @@ public class LoginViewModel extends ViewModel {
     }
 
     public MutableLiveData<Optional<User>> signInWithEmail(String email, String password) {
-        return loginRepository.firebaseSignInWithEmail(email, password);
-    }
-    public MutableLiveData<Optional<User>> signInWithEmailEx(Context context, String email, String password) {
         return loginRepository.firebaseSignInWithEmail(email, password);
     }
 

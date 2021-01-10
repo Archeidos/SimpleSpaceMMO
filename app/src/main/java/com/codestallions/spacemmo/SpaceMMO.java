@@ -1,23 +1,22 @@
 package com.codestallions.spacemmo;
 
 import android.app.Application;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
 public class SpaceMMO extends Application {
 
-    private static FirebaseAuth authentication;
+    private static FirebaseAuth auth;
 
     //Add Dagger here
 
     @Override
     public void onCreate() {
         super.onCreate();
-        authentication = FirebaseAuth.getInstance();
+        auth = FirebaseAuth.getInstance();
     }
 
     public static FirebaseAuth getAuth() {
-        return authentication;
+        return auth;
     }
 }

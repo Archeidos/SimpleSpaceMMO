@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -39,6 +40,8 @@ public class LoginFragment extends Fragment implements ILoginFragment {
 
         emailEditText = loginBinding.getRoot().findViewById(R.id.login_email_entry);
         passwordEditText = loginBinding.getRoot().findViewById(R.id.login_password_entry);
+        Button loginButon = loginBinding.getRoot().findViewById(R.id.login_confirm_button);
+        loginButon.setOnClickListener(view -> handleLoginEntry());
         return loginBinding.getRoot();
     }
 
