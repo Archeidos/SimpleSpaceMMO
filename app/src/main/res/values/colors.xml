@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Common -->
     <color name="colorPrimary">#232323</color>
     <color name="colorPrimaryDark">#000000</color>
+    <color name="colorSecondary">#353535</color>
+    <color name="colorSecondaryDark">#0f0f0f</color>
     <color name="colorAccent">#008AD4</color>
 
     <color name="loginBackground">#000000</color>
     <color name="loginContainerBackground">#E66E6E6E</color>
 
     <color name="textPrimaryColor">#FFFFFF</color>
+
+
+    <!-- Specific -->
+    <color name="system_item_background">@color/colorSecondaryDark</color>
+    <color name="system_fragment_background">@color/colorSecondary</color>
 
 </resources>

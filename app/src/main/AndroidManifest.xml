@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.codestallions.spacemmo">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".SpaceMMO"
         android:allowBackup="true"
@@ -23,6 +25,6 @@
         <activity android:name=".ui.activities.LoginActivity"
             android:screenOrientation = "portrait"
             tools:ignore="LockedOrientationActivity" />
-    </application>
 
+    </application>
 </manifest>

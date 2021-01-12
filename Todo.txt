@@ -1,0 +1,1 @@
+- Implement components build in https://firebaseopensource.com/projects/firebase/firebaseui-android pertaining to Firestore (RecyclerView component looks useful)

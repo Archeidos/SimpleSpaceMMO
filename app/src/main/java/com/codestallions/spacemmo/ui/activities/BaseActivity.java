@@ -27,9 +27,11 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     private void validateLoginStatus() {
-        if (SpaceMMO.getAuth().getCurrentUser() == null) {
-            navigateToLogin();
-        }
+        SpaceMMO.getAuth().addAuthStateListener(firebaseAuth -> {
+            if (firebaseAuth.getCurrentUser() == null) {
+                navigateToLogin();
+            }
+        });
     }
 
     protected void navigateToLogin() {

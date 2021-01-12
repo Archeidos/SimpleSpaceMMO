@@ -2,20 +2,27 @@ package com.codestallions.spacemmo.ui.fragments;
 
 import android.os.Bundle;
 
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.codestallions.spacemmo.R;
+import com.codestallions.spacemmo.databinding.FragmentSystemBinding;
+import com.codestallions.spacemmo.ui.adapter.SystemAdapter;
+import com.codestallions.spacemmo.ui.viewmodel.SystemViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link SystemFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SystemFragment extends Fragment {
+public class SystemFragment extends BaseFragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,6 +32,8 @@ public class SystemFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private SystemViewModel systemViewModel;
 
     public SystemFragment() {
         // Required empty public constructor
@@ -60,7 +69,18 @@ public class SystemFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_system, container, false);
+        FragmentSystemBinding systemBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_system, container, false);
+        systemViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(SystemViewModel.class);
+        systemBinding.setSystemViewModel(systemViewModel);
+
+        RecyclerView systemRecycler = systemBinding.getRoot().findViewById(R.id.system_recycler_view);
+        systemRecycler.setAdapter(new SystemAdapter(this));
+        systemRecycler.setLayoutManager(new GridLayoutManager(getContext(), 4));
+
+        systemViewModel.getLocalPlanetList().observe(this, planets -> {
+            systemRecycler.setAdapter(new SystemAdapter(planets, this));
+        });
+
+        return systemBinding.getRoot();
     }
 }
