@@ -5,16 +5,18 @@ import android.os.Bundle;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 
 import com.codestallions.spacemmo.R;
 import com.codestallions.spacemmo.databinding.FragmentSystemBinding;
-import com.codestallions.spacemmo.ui.adapter.SystemAdapter;
+import com.codestallions.spacemmo.ui.adapter.GeneralAdapter;
+import com.codestallions.spacemmo.ui.adapter.NestedRecyclerListener;
 import com.codestallions.spacemmo.ui.viewmodel.SystemViewModel;
 
 /**
@@ -74,11 +76,32 @@ public class SystemFragment extends BaseFragment {
         systemBinding.setSystemViewModel(systemViewModel);
 
         RecyclerView systemRecycler = systemBinding.getRoot().findViewById(R.id.system_recycler_view);
-        systemRecycler.setAdapter(new SystemAdapter(this));
-        systemRecycler.setLayoutManager(new GridLayoutManager(getContext(), 4));
+        GeneralAdapter generalAdapter = new GeneralAdapter(getContext());
+        systemRecycler.setAdapter(generalAdapter);
+        systemRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
 
         systemViewModel.getLocalPlanetList().observe(this, planets -> {
-            systemRecycler.setAdapter(new SystemAdapter(planets, this));
+            generalAdapter.setPlanetList(planets);
+            generalAdapter.notifyDataSetChanged();
+            systemRecycler.getViewTreeObserver().addOnPreDrawListener(
+                    new ViewTreeObserver.OnPreDrawListener() {
+
+                        @Override
+                        public boolean onPreDraw() {
+                            systemRecycler.getViewTreeObserver().removeOnPreDrawListener(this);
+
+                            for (int i = 0; i < systemRecycler.getChildCount(); i++) {
+                                View v = systemRecycler.getChildAt(i);
+                                v.setAlpha(0.0f);
+                                v.animate().alpha(1.0f)
+                                        .setDuration(300)
+                                        .setStartDelay(i * 50)
+                                        .start();
+                            }
+
+                            return true;
+                        }
+                    });
         });
 
         return systemBinding.getRoot();

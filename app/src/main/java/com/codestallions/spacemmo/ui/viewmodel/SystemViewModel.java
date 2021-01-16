@@ -3,7 +3,7 @@ package com.codestallions.spacemmo.ui.viewmodel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.codestallions.spacemmo.model.Planet;
+import com.codestallions.spacemmo.model.PlanetModel;
 import com.codestallions.spacemmo.network.MainRepository;
 
 import java.util.List;
@@ -16,7 +16,7 @@ public class SystemViewModel extends ViewModel {
         mainRepository = MainRepository.getInstance();
     }
 
-    public MutableLiveData<List<Planet>> getLocalPlanetList() {
+    public MutableLiveData<List<PlanetModel>> getLocalPlanetList() {
         return mainRepository.retrieveLocalPlanets();
     }
 

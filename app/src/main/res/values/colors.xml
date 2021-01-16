@@ -5,11 +5,10 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorSecondary">#353535</color>
     <color name="colorSecondaryDark">#0f0f0f</color>
-    <color name="colorAccent">#008AD4</color>
+    <color name="colorAccent">#0FABFF</color>
 
     <color name="loginBackground">#000000</color>
     <color name="loginContainerBackground">#E66E6E6E</color>
-
     <color name="textPrimaryColor">#FFFFFF</color>
 
 

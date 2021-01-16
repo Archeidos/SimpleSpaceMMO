@@ -75,6 +75,7 @@ public class MainActivity extends BaseActivity implements
 
         switch (id) {
             case R.id.menu_star_map_button:
+//                NavDeepLinkRequest navDeepLinkRequest = new NavDeepLinkRequest(new Intent());
                 navController.navigate(R.id.starmapFragment);
                 break;
             case R.id.menu_system_button:

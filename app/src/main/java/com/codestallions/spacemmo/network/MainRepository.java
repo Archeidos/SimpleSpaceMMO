@@ -4,15 +4,12 @@ import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.codestallions.spacemmo.model.Planet;
-import com.google.firebase.firestore.DocumentSnapshot;
+import com.codestallions.spacemmo.model.PlanetModel;
+import com.codestallions.spacemmo.model.StarsModel;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class MainRepository {
 
@@ -23,33 +20,21 @@ public class MainRepository {
         return SingletonHolder.INSTANCE;
     }
 
-    public MutableLiveData<List<Planet>> retrieveLocalPlanets() {
-        MutableLiveData<List<Planet>> result = new MutableLiveData<>();
+
+    public MutableLiveData<List<PlanetModel>> retrieveLocalPlanets() {
+        MutableLiveData<List<PlanetModel>> result = new MutableLiveData<>();
         FirebaseFirestore.getInstance()
                 .collection("starmap")
-                .document("stars")
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot doc = task.getResult();
-                        Map<String, Object> starsMap = doc.getData();
-                        Log.d("", "");
-                        HashMap<String, Object> stanton = (HashMap<String, Object>) starsMap.get("Stanton");
-                        HashMap<String, Object> planets = (HashMap<String, Object>) stanton.get("planets");
-                        List<Planet> planetList = new ArrayList<>();
-                        for (Object o : planets.values()) {
-                            HashMap<String, Object> map = (HashMap<String, Object>) o;
-                            Planet planet = new Planet();
-                            planet.setImagePath(map.get("image_path").toString());
-                            planet.setName(map.get("name").toString());
-                            planetList.add(planet);
-                        }
-                        result.setValue(planetList);
-                        Log.d("", "");
-                    } else {
-
+                .document("stars").addSnapshotListener((value, error) -> {
+                    if (error != null ) {
+                        Log.e("", "");
                     }
-        });
+
+                    if (value != null && value.exists()) {
+                        StarsModel stars = value.toObject(StarsModel.class);
+                        result.setValue(stars.getSystems().get(0).getPlanets());
+                    }
+                });
         return result;
     }
 
