@@ -16,6 +16,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.codestallions.spacemmo.R;
+import com.codestallions.spacemmo.SessionManager;
+import com.codestallions.spacemmo.SpaceMMO;
 import com.codestallions.spacemmo.databinding.FragmentLoginBinding;
 import com.codestallions.spacemmo.ui.activities.MainActivity;
 import com.codestallions.spacemmo.ui.viewmodel.LoginViewModel;
@@ -44,6 +46,12 @@ public class LoginFragment extends Fragment implements ILoginFragment {
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        handleLoginNavigation();
+    }
+
+    @Override
     public void handleLoginEntry() {
         emailEntry = emailEditText.getText().toString().trim();
         passwordEntry = passwordEditText.getText().toString().trim();
@@ -64,14 +72,19 @@ public class LoginFragment extends Fragment implements ILoginFragment {
     @Override
     public void navigateToAccountCreation() {
         Fragment newFragment = new CreateAccountFragment();
-        if (getFragmentManager() != null) {
-            getFragmentManager().beginTransaction().replace(R.id.login_root_container, newFragment).commit();
+        getParentFragmentManager().beginTransaction().replace(R.id.login_root_container, newFragment).commit();
+    }
+
+    private void handleLoginNavigation() {
+        if (SpaceMMO.getAuth().getCurrentUser() != null) {
+            navigateToMainActivity();
         }
     }
 
     private void navigateToMainActivity() {
         Intent intent = new Intent(getActivity(), MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        SessionManager.getInstance().cacheLoginExpirationTime(getContext());
         startActivity(intent);
     }
 
