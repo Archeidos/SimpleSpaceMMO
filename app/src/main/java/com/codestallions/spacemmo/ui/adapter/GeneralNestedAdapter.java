@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.codestallions.spacemmo.R;
-import com.codestallions.spacemmo.model.PlanetDestination;
+import com.codestallions.spacemmo.model.DestinationModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,11 +19,14 @@ public class GeneralNestedAdapter extends RecyclerView.Adapter<GeneralNestedAdap
 
     private Context context;
 
-    private List<PlanetDestination> destinations = new ArrayList<>();
+    private List<DestinationModel> destinations = new ArrayList<>();
 
-    public GeneralNestedAdapter(List<PlanetDestination> destinations, Context context) {
-        this.destinations = destinations;
+    public GeneralNestedAdapter(Context context) {
         this.context = context;
+    }
+
+    public void setDestinations(List<DestinationModel> destinations) {
+        this.destinations = destinations;
     }
 
     @NonNull

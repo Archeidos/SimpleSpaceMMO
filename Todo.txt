@@ -3,3 +3,5 @@
 - Animating RecyclerView https://www.youtube.com/watch?v=XLQFbGv-qT4
 
 - Look into using EncryptedSharedPreferences from JetPack to secure expiration timestamp
+
+- How to embed Unity in the app https://medium.com/xrpractices/embedding-unity-app-inside-native-android-application-c7b82245f8af

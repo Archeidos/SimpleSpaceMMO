@@ -14,8 +14,10 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.codestallions.spacemmo.R;
 import com.codestallions.spacemmo.databinding.FragmentCreateAccountBinding;
+import com.codestallions.spacemmo.model.PlayerModel;
 import com.codestallions.spacemmo.ui.viewmodel.LoginViewModel;
-import com.codestallions.spacemmo.util.StringUtil;
+
+import static com.codestallions.spacemmo.util.StringUtil.isTextEntered;
 
 public class CreateAccountFragment extends Fragment implements ICreateAccountFragment {
 
@@ -49,9 +51,15 @@ public class CreateAccountFragment extends Fragment implements ICreateAccountFra
         passwordEntry = passwordEditText.getText().toString().trim();
         confirmPasswordEntry = confirmPasswordEditText.getText().toString().trim();
 
-        if (StringUtil.isTextEntered(emailEntry, passwordEntry, confirmPasswordEntry)) {
+        if (isTextEntered(emailEntry, passwordEntry, confirmPasswordEntry)) {
             if (passwordEntry.equals(confirmPasswordEntry)) {
-                loginViewModel.createAccountWithEmail(emailEntry, passwordEntry);
+                loginViewModel.createAccountWithEmail(emailEntry, passwordEntry)
+                        .observe(getViewLifecycleOwner(), authUser -> {
+                            if (authUser.isPresent()) {
+                                PlayerModel newPlayerProfile = new PlayerModel(authUser.get().getUid(), authUser.get().getEmail());
+                                loginViewModel.postNewPlayerProfile(newPlayerProfile);
+                            }
+                });
             }
         }
     }

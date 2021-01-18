@@ -1,5 +1,36 @@
+# Build generated
+build/
+DerivedData/
+
+# Intellij
 *.iml
+.idea
+
+# Android Studio
+captures/
+.externalNativeBuild
+
+# Built Android application files
+*.apk
+
+# Google Services (ex. APIs and Firebase)
+google-services.json
+GoogleService-Info.plist
+
+# Firebase Hosting
+.firebaserc
+firebase-debug.log
+
+# Other
 .gradle
+local.properties
+.DS_Store
+*.aar
+*.zip
+.project
+.settings
+.classpath
+.vscode
 /local.properties
 /.idea/caches
 /.idea/libraries
@@ -7,8 +38,6 @@
 /.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
-.DS_Store
 /build
 /captures
-.externalNativeBuild
 .cxx

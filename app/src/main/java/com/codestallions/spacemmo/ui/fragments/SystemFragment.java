@@ -76,11 +76,11 @@ public class SystemFragment extends BaseFragment {
         systemBinding.setSystemViewModel(systemViewModel);
 
         RecyclerView systemRecycler = systemBinding.getRoot().findViewById(R.id.system_recycler_view);
-        GeneralAdapter generalAdapter = new GeneralAdapter(getContext());
+        GeneralAdapter generalAdapter = new GeneralAdapter(getContext(), getViewLifecycleOwner(), systemViewModel);
         systemRecycler.setAdapter(generalAdapter);
         systemRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        systemViewModel.getLocalPlanetList().observe(this, planets -> {
+        systemViewModel.getLocalPlanetList().observe(getViewLifecycleOwner(), planets -> {
             generalAdapter.setPlanetList(planets);
             generalAdapter.notifyDataSetChanged();
             systemRecycler.getViewTreeObserver().addOnPreDrawListener(

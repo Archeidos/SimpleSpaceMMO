@@ -1,6 +1,6 @@
 package com.codestallions.spacemmo.model;
 
-import java.util.List;
+import com.google.firebase.firestore.DocumentReference;
 
 public class PlanetModel {
 
@@ -8,7 +8,7 @@ public class PlanetModel {
 
     private String imagePath;
 
-    private List<PlanetDestination> destinations;
+    private DocumentReference destinationsRef;
 
     public PlanetModel() {
     }
@@ -21,7 +21,7 @@ public class PlanetModel {
         return imagePath;
     }
 
-    public List<PlanetDestination> getDestinations() {
-        return destinations;
+    public DocumentReference getDestinationsRef() {
+        return destinationsRef;
     }
 }
