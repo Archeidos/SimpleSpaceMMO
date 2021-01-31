@@ -1,5 +1,10 @@
 <resources>
+
+    <!-- Primary app strings -->
     <string name="app_name">SimpleSpaceMMO</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="app_package_name">com.codestallions.spacemmo</string>
+    <string name="dynamic_link_domain">codestallions.page.link</string>
+    <string name="dynamic_link_verification_address">https://codestallions.page.link/verify</string>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

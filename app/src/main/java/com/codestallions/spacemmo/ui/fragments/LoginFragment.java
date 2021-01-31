@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,14 +19,13 @@ import com.codestallions.spacemmo.SpaceMMO;
 import com.codestallions.spacemmo.databinding.FragmentLoginBinding;
 import com.codestallions.spacemmo.ui.activities.MainActivity;
 import com.codestallions.spacemmo.ui.viewmodel.LoginViewModel;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginFragment extends Fragment implements ILoginFragment {
+    private static final String TAG = LoginFragment.class.getSimpleName();
+    public static final String CREATE_TAG = "CREATE_TAG";
 
-    private EditText emailEditText;
-    private EditText passwordEditText;
-
-    private String emailEntry;
-    private String passwordEntry;
+    private FragmentLoginBinding loginBinding;
 
     private LoginViewModel loginViewModel;
 
@@ -40,26 +37,31 @@ public class LoginFragment extends Fragment implements ILoginFragment {
         loginBinding.setLoginViewModel(loginViewModel);
         loginBinding.setILoginFragment(this);
 
-        emailEditText = loginBinding.getRoot().findViewById(R.id.login_email_entry);
-        passwordEditText = loginBinding.getRoot().findViewById(R.id.login_password_entry);
+        handleLoginNavigation();
         return loginBinding.getRoot();
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        handleLoginNavigation();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     @Override
     public void handleLoginEntry() {
-        emailEntry = emailEditText.getText().toString().trim();
-        passwordEntry = passwordEditText.getText().toString().trim();
+        String emailEntry = loginBinding.loginEmailEntry.getText().toString().trim();
+        String passwordEntry = loginBinding.loginPasswordEntry.getText().toString().trim();
 
         if (!emailEntry.isEmpty() && !passwordEntry.isEmpty()) {
             loginViewModel.signInWithEmail(emailEntry, passwordEntry).observe(this, user -> {
-                if (user.isPresent()) {
-                    navigateToMainActivity();
+                if (user.isPresent() && isUserSignedInValid()) {
+                    handleLoginNavigation();
+                } else if (user.isPresent() && !isUserSignedInValid()) {
+                    Toast.makeText(getActivity(), "Please verify your email address to sign in.", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getActivity(), "Invalid username and password.", Toast.LENGTH_LONG).show();
                 }
@@ -72,20 +74,33 @@ public class LoginFragment extends Fragment implements ILoginFragment {
     @Override
     public void navigateToAccountCreation() {
         Fragment newFragment = new CreateAccountFragment();
-        getParentFragmentManager().beginTransaction().replace(R.id.login_root_container, newFragment).commit();
+        getParentFragmentManager().beginTransaction().replace(R.id.login_root_container, newFragment).addToBackStack(CREATE_TAG).commit();
     }
 
     private void handleLoginNavigation() {
-        if (SpaceMMO.getAuth().getCurrentUser() != null) {
-            navigateToMainActivity();
+        // Query player profile in DB, update 'verified' to true and place player in world if it was false.
+        if (isUserSignedInValid()) {
+            loginViewModel.handleLoginRequirements(SpaceMMO.getAuth().getCurrentUser().getUid())
+                    .observe(getViewLifecycleOwner(), isSuccessful -> {
+                        if (isSuccessful) {
+                            navigateToMainActivity();
+                        } else {
+                            Toast.makeText(getContext(), "Something went wrong. Please try again later.", Toast.LENGTH_LONG).show();
+                        }
+            });
         }
     }
 
     private void navigateToMainActivity() {
         Intent intent = new Intent(getActivity(), MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        SessionManager.getInstance().cacheLoginExpirationTime(getContext());
+        SessionManager.getInstance().saveLoginExpirationTime(getContext());
         startActivity(intent);
+    }
+
+    private boolean isUserSignedInValid() {
+        FirebaseUser user = SpaceMMO.getAuth().getCurrentUser();
+        return user != null && user.isEmailVerified();
     }
 
 }
