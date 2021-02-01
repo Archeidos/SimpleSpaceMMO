@@ -32,7 +32,7 @@ public class LoginFragment extends Fragment implements ILoginFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        FragmentLoginBinding loginBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false);
+        loginBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false);
         loginViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(LoginViewModel.class);
         loginBinding.setLoginViewModel(loginViewModel);
         loginBinding.setILoginFragment(this);
@@ -94,7 +94,7 @@ public class LoginFragment extends Fragment implements ILoginFragment {
     private void navigateToMainActivity() {
         Intent intent = new Intent(getActivity(), MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        SessionManager.getInstance().saveLoginExpirationTime(getContext());
+        SpaceMMO.getSession().saveLoginExpirationTime(getContext());
         startActivity(intent);
     }
 

@@ -10,9 +10,9 @@ public class PlayerModel {
 
     private String displayName;
 
-    private boolean isVerified;
+    private boolean verified;
 
-    private DocumentReference location;
+    private String locationRef;
 
     public PlayerModel() {
     }
@@ -32,7 +32,7 @@ public class PlayerModel {
     }
 
     public boolean isVerified() {
-        return isVerified;
+        return verified;
     }
 
     public String getDisplayName() {
@@ -41,5 +41,9 @@ public class PlayerModel {
 
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
+    }
+
+    public String getLocationRef() {
+        return locationRef;
     }
 }

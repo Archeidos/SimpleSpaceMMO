@@ -20,7 +20,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     {
         public void run()
         {
-            if (SessionManager.getInstance().isLoginExpired(getApplicationContext()) &&
+            if (SpaceMMO.getSession().isLoginExpired(getApplicationContext()) &&
                     SpaceMMO.getAuth().getCurrentUser() != null) {
                 SpaceMMO.getAuth().signOut();
                 navigateToLogin();
@@ -50,7 +50,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         sessionCheckHandler.postDelayed(sessionCheckRunnable, SESSION_CHECK_INTERVAL);
     }
 
-    protected void navigateToLogin() {
+    public void navigateToLogin() {
         Intent intent = new Intent(this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);

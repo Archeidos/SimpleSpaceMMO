@@ -4,9 +4,12 @@ import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.codestallions.spacemmo.SpaceMMO;
 import com.codestallions.spacemmo.model.DestinationModel;
 import com.codestallions.spacemmo.model.PlanetModel;
+import com.codestallions.spacemmo.model.PlayerModel;
 import com.codestallions.spacemmo.model.RootDestinationsModel;
+import com.codestallions.spacemmo.model.StarSystemModel;
 import com.codestallions.spacemmo.model.StarsModel;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -26,7 +29,7 @@ public class MainRepository {
     }
 
 
-    public MutableLiveData<List<PlanetModel>> retrieveLocalPlanets() {
+    public MutableLiveData<List<PlanetModel>> retrieveLocalPlanets(String currentSystem) {
         MutableLiveData<List<PlanetModel>> result = new MutableLiveData<>();
         FirebaseFirestore.getInstance()
                 .collection("starmap")
@@ -37,7 +40,13 @@ public class MainRepository {
 
                     if (value != null && value.exists()) {
                         StarsModel stars = value.toObject(StarsModel.class);
-                        result.setValue(stars.getSystems().get(0).getPlanets());
+
+                        for (StarSystemModel system : stars.getSystems()) {
+                            if (system.getName().equals(currentSystem)) {
+                                result.setValue(system.getPlanets());
+                            }
+                        }
+                        //To Do: Handle planet match not found
                     }
                 });
         return result;
@@ -57,6 +66,24 @@ public class MainRepository {
                 }
             });
         }
+        return result;
+    }
+
+    public MutableLiveData<PlayerModel> retrievePlayerData() {
+        MutableLiveData<PlayerModel> result = new MutableLiveData<>();
+        FirebaseFirestore.getInstance()
+                .collection("players")
+                .document(SpaceMMO.getAuth().getUid())
+                .addSnapshotListener((value, error) -> {
+                    if (error != null) {
+                        Log.e(TAG, error.toString());
+                    }
+
+                    if (value != null && value.exists()) {
+                        PlayerModel playerModel = value.toObject(PlayerModel.class);
+                        result.setValue(playerModel);
+                    }
+                });
         return result;
     }
 

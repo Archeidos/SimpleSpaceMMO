@@ -14,9 +14,9 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 
 import com.codestallions.spacemmo.R;
+import com.codestallions.spacemmo.SpaceMMO;
 import com.codestallions.spacemmo.databinding.FragmentSystemBinding;
 import com.codestallions.spacemmo.ui.adapter.GeneralAdapter;
-import com.codestallions.spacemmo.ui.adapter.NestedRecyclerListener;
 import com.codestallions.spacemmo.ui.viewmodel.SystemViewModel;
 
 /**
@@ -80,7 +80,8 @@ public class SystemFragment extends BaseFragment {
         systemRecycler.setAdapter(generalAdapter);
         systemRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        systemViewModel.getLocalPlanetList().observe(getViewLifecycleOwner(), planets -> {
+        systemViewModel.getLocalPlanetList(SpaceMMO.getSession().getPlayerSystemLocation())
+                .observe(getViewLifecycleOwner(), planets -> {
             generalAdapter.setPlanetList(planets);
             generalAdapter.notifyDataSetChanged();
             systemRecycler.getViewTreeObserver().addOnPreDrawListener(

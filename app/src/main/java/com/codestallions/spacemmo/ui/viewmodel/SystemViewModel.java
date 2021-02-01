@@ -18,8 +18,8 @@ public class SystemViewModel extends ViewModel {
         mainRepository = MainRepository.getInstance();
     }
 
-    public MutableLiveData<List<PlanetModel>> getLocalPlanetList() {
-        return mainRepository.retrieveLocalPlanets();
+    public MutableLiveData<List<PlanetModel>> getLocalPlanetList(String currentSystem) {
+        return mainRepository.retrieveLocalPlanets(currentSystem);
     }
 
     public MutableLiveData<List<DestinationModel>> getPlanetDestinationList(DocumentReference destinationsRef) {
