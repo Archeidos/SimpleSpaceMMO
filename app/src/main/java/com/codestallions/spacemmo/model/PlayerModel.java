@@ -1,6 +1,5 @@
 package com.codestallions.spacemmo.model;
 
-import com.google.firebase.firestore.DocumentReference;
 
 public class PlayerModel {
 
