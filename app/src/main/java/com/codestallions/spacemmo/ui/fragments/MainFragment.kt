@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProvider.NewInstanceFactory
@@ -17,14 +18,13 @@ import com.codestallions.spacemmo.ui.activities.MainActivity
 import com.codestallions.spacemmo.ui.viewmodel.MainViewModel
 
 class MainFragment : BaseFragment() {
-    private lateinit var mainViewModel: MainViewModel
+    private val mainViewModel: MainViewModel by viewModels()
     private lateinit var mainBinding: FragmentMainBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         mainBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
-        mainViewModel = ViewModelProvider(this, NewInstanceFactory()).get(MainViewModel::class.java)
         mainBinding.mainViewModel = mainViewModel
-        mainViewModel.syncPlayerData().observe(viewLifecycleOwner, Observer { playerModel: PlayerModel? ->
+        mainViewModel.syncPlayerData().observe(viewLifecycleOwner, { playerModel: PlayerModel? ->
             if (playerModel != null) {
                 SpaceMMO.getSession().cachePlayerData(playerModel)
             } else {

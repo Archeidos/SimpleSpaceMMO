@@ -47,6 +47,10 @@ public class SessionManager {
         return playerLocationSegments[CURRENT_PLANET];
     }
 
+    public String getPlayerCoordinates() {
+        return playerModel.getCurrentCoords();
+    }
+
     public boolean isLoginExpired(Context context) {
         return System.currentTimeMillis() / 1000L >= SharedPrefUtil.getLongData(context, LOGIN_EXPIRATION_TIME_STAMP);
     }

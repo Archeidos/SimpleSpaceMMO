@@ -6,6 +6,8 @@ public class DestinationModel {
 
     private String name;
 
+    private String locationInAU;
+
     private List<InteractiveModel> interactives;
 
     public DestinationModel() {
@@ -13,6 +15,10 @@ public class DestinationModel {
 
     public String getName() {
         return name;
+    }
+
+    public String getLocationInAU() {
+        return locationInAU;
     }
 
     public List<InteractiveModel> getInteractives() {

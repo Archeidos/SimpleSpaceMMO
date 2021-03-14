@@ -108,6 +108,7 @@ public class LoginRepository {
                         Map<String, Object> updatedData = new HashMap<>();
                         updatedData.put("verified", true);
                         updatedData.put("locationRef", "/starmap/stars/Stanton/Crusader");
+                        updatedData.put("currentCoords", "0,0");
 
 
                         FirebaseFirestore.getInstance()

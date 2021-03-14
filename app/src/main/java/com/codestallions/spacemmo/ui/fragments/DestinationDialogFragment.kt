@@ -18,6 +18,7 @@ import com.codestallions.spacemmo.ui.viewmodel.LoginViewModel
 class DestinationDialogFragment private constructor() : DialogFragment() {
     private lateinit var binding: FragmentDestinationDialogBinding
     private val viewModel: DestinationViewModel by viewModels { DestinationViewModelFactory(arguments) }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_destination_dialog, container, false)
         binding.destinationViewModel = viewModel
@@ -26,10 +27,11 @@ class DestinationDialogFragment private constructor() : DialogFragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(title: String?): DestinationDialogFragment {
+        fun newInstance(title: String?, location: String?): DestinationDialogFragment {
             val fragment = DestinationDialogFragment()
             val args = Bundle()
             args.putString("title", title)
+            args.putString("location", location)
             fragment.arguments = args
             return fragment
         }

@@ -44,7 +44,7 @@ public class GeneralNestedAdapter extends RecyclerView.Adapter<GeneralNestedAdap
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.title.setText(destinations.get(position).getName());
         holder.destinationItem.setOnClickListener(v -> {
-            DestinationDialogFragment dialog = DestinationDialogFragment.newInstance(holder.title.getText().toString());
+            DestinationDialogFragment dialog = DestinationDialogFragment.newInstance(holder.title.getText().toString(), destinations.get(position).getLocationInAU());
             dialog.show(FragmentManager.findFragment(holder.itemView).getParentFragmentManager(), "fragment_destination");
         });
     }

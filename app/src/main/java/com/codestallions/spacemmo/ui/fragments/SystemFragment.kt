@@ -46,7 +46,7 @@ class SystemFragment : BaseFragment() {
         systemRecycler.adapter = generalAdapter
         systemRecycler.layoutManager = LinearLayoutManager(context)
         systemViewModel.getLocalPlanetList(SpaceMMO.getSession().playerSystemLocation)
-                .observe(viewLifecycleOwner, Observer { planets: List<PlanetModel?>? ->
+                .observe(viewLifecycleOwner, { planets: List<PlanetModel?>? ->
                     generalAdapter.setPlanetList(planets)
                     generalAdapter.notifyDataSetChanged()
                     systemRecycler.viewTreeObserver.addOnPreDrawListener(

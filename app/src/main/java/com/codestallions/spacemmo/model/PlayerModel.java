@@ -13,6 +13,8 @@ public class PlayerModel {
 
     private String locationRef;
 
+    private String currentCoords;
+
     public PlayerModel() {
     }
 
@@ -44,5 +46,9 @@ public class PlayerModel {
 
     public String getLocationRef() {
         return locationRef;
+    }
+
+    public String getCurrentCoords() {
+        return currentCoords;
     }
 }
